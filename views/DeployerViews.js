@@ -22,8 +22,7 @@ exports.Setchallenge = class extends React.Component {
     const {parent, defaultreward, defaultprice, standardUnit} = this.props;
     const reward = (this.state || {}).reward || defaultreward;
     const payment = (this.state || {}).payment || defaultprice;
-    //const price1 = (this.state || {}).price1 || defaultprice;
-    //const price2 = (this.state || {}).price2 || defaultprice;
+
     return (
       <div>
         <p></p>
@@ -52,8 +51,6 @@ exports.Setchallenge = class extends React.Component {
     );
   }
 }
-
-
 
 exports.Deploy = class extends React.Component {
   render() {
@@ -88,7 +85,6 @@ exports.Deploying = class extends React.Component {
   }
 }
 
-
 exports.WaitingForAttacher = class extends React.Component {
   async copyToClipborad(button) {
     const {ctcInfoStr} = this.props;
@@ -117,6 +113,5 @@ exports.WaitingForAttacher = class extends React.Component {
     )
   }
 }
-
 
 export default exports;

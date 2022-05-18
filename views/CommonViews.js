@@ -5,10 +5,7 @@ const exports = {};
 // Common views must be extended.
 // It does not have its own Wrapper view.
 
-
-
 exports.seeTransfer = class extends React.Component {
- 
   render() {
     const {parent} = this.props;
     return (
@@ -36,7 +33,7 @@ exports.setTask1 = class extends React.Component {
           >Done it!</button>
       </div>
     );
-}
+  }
 }
 
 exports.setTask2 = class extends React.Component {
@@ -56,7 +53,6 @@ exports.setTask2 = class extends React.Component {
       </div>
     );
   }
-
 }
 
 exports.setTask3 = class extends React.Component {
@@ -76,7 +72,6 @@ exports.setTask3 = class extends React.Component {
     );
   }
 }
-
 
 // Doesn't work using "Task4". Just doesn't. CHange it to "Task04"
 // and everything's fine. "Task1"---"Task7" are fine. Weird.
@@ -177,7 +172,6 @@ exports.Done = class extends React.Component {
     );
   }
 }
-
 
 exports.Timeout = class extends React.Component {
   render() {

@@ -48,28 +48,6 @@ exports.Attaching = class extends React.Component {
   }
 }
 
-//May implement this later
-
-// exports.Chooseprice = class extends React.Component {
-//  render() {
-//    const {parent, price0, price1, price2, standardUnit} = this.props;
-//    const ichoice = (this.state || {}).ichoice || defaultchoice;
-//    return (
-//      <div>
-//        <input
-//          type='number'
-//          placeholder={defaultchoice}
-//          onChange={(e) => this.setState({ichoice: e.currentTarget.value})}
-//        /> {standardUnit}
-//        <br />
-//        <button
-//          onClick={() => parent.chooseprice (ichoice)}
-//        >Let's choose the amount</button>
-//      </div>
-//    );
-//  }
-// }
-
 exports.AcceptTerms = class extends React.Component {
   render() {
     const {reward, payment, standardUnit, parent} = this.props;
@@ -92,8 +70,5 @@ exports.AcceptTerms = class extends React.Component {
     );
   }
 }
-
-
-
 
 export default exports;

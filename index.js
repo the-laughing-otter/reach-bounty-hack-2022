@@ -12,15 +12,8 @@ const reach = loadStdlib(process.env);
 const {standardUnit} = reach;
 const defaults = {defaultFundAmt: '10', defaultprice: '1', defaultreward: '2', standardUnit};
 
-// reach.setWalletFallback(reach.walletFallback({}));
 reach.setWalletFallback(reach.walletFallback({
   providerEnv: 'TestNet', MyAlgoConnect }));
-
-
-// or
-// import MyAlgoConnect from '@reach-sh/stdlib/ALGO_MyAlgoConnect';
-// stdlib.setWalletFallback(stdlib.walletFallback({
-// providerEnv: 'TestNet', MyAlgoConnect }));
 
 class App extends React.Component {
     constructor(props) {
@@ -78,8 +71,7 @@ class Deployer extends Common {
       this.reward = reach.parseCurrency(this.state.reward); // UInt
       this.deadline = {ETH: 10, ALGO: 100, CFX: 1000}[reach.connector];
       this.payment = reach.parseCurrency(this.state.payment);
-     // this.price1 = reach.parseCurrency(this.state.price1);
-     // this.price2 = reach.parseCurrency(this.state.price2);
+
       backend.Alice(ctc, this);
       const ctcInfoStr = JSON.stringify(await ctc.getInfo(), null, 2);
       this.setState({view: 'WaitingForAttacher', ctcInfoStr});
@@ -95,37 +87,18 @@ class Deployer extends Common {
     attach(ctcInfoStr) {
       const ctc = this.props.acc.contract(backend, JSON.parse(ctcInfoStr));
       this.setState({view: 'Attaching'});
-   // chooseprice(reward, price0, price1, price2,  deadline)
-    //{this.setState({view: 'Chooseprice', ichoice, price0, price1, price2}); }
-    //this.ichoice = 0;
-    //this.dotask = true; 
+
     backend.Bob(ctc, this);
     }
   
-
     async accchallenge(rewardAtomic, paymentAtomic){
       const reward = reach.formatCurrency(rewardAtomic, 4);
       const payment = reach.formatCurrency(paymentAtomic, 4);  
        return await new Promise(resolveAcceptedP => {
         this.setState({view: 'AcceptTerms', reward, payment, resolveAcceptedP});
       });
-    
-// option for choosing payment. 
-// try it later when everything else is working.
-//
-//   }
-//     else if(ichoice == 1){
-//      return await new Promise(resolveAcceptedP => {
-//        this.setState({view: 'AcceptTerms', price1, resolveAcceptedP});
-//      });  
-//     }
-//     else if(ichoice == 2){
-//      return await new Promise(resolveAcceptedP => {
-//        this.setState({view: 'AcceptTerms', price2, resolveAcceptedP});
-//      });    
-//     }
-
     }
+    
     termsAccepted() {
       this.state.resolveAcceptedP();
   //    this.setState({view: 'setTask1', Task1});
