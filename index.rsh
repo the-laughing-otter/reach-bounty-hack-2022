@@ -1,19 +1,60 @@
 'reach 0.1';
 
+const Common = {
+  ...hasRandom,
+  informTimeout: Fun([], Null),
+  seeTransfer: Fun([], Null),
+  Task1: Bytes(128),
+  Task2: Bytes(128),
+  Task3: Bytes(128),
+  Task04: Bytes(128),
+  Task5: Bytes(128),
+  Task6: Bytes(128),
+  Task7: Bytes(128), 
+
+};
+
 export const main = Reach.App(() => {
   const A = Participant('Alice', {
-    // Specify Alice's interact interface here
+    ...Common,
+  reward: UInt,
+  payment: UInt, 
+  deadline: UInt,
   });
+
   const B = Participant('Bob', {
-    // Specify Bob's interact interface here
+    ...Common,
+    accchallenge: Fun([UInt, UInt], Bool),
+    termsAccepted: Bool,
+    Response1: Bytes(128),
   });
   init();
-  // The first one to publish deploys the contract
-  A.publish();
+
+  A.only(() => {
+    const reward = declassify(interact.reward);  
+    const deadline = declassify(interact.deadline);
+    const payment = declassify(interact.payment);
+    });
+
+  A.publish(reward, payment, deadline);
   commit();
-  // The second one to publish always attaches
-  B.publish();
+  A.pay(reward);
   commit();
-  // write your program here
-  exit();
-});
+  
+  B.only(() => {
+ 
+   const termsAccepted =
+   declassify(interact.accchallenge(reward, payment));
+  });
+  
+  B.pay(payment);
+  commit();
+
+A.publish();
+transfer(payment).to(A);
+transfer(reward).to(B);
+each([A, B], () => interact.seeTransfer());
+commit();
+
+exit();
+})
