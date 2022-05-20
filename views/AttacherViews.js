@@ -50,13 +50,13 @@ exports.Attaching = class extends React.Component {
 
 exports.AcceptTerms = class extends React.Component {
   render() {
-    const {reward, payment, standardUnit, parent} = this.props;
+    const {payment, standardUnit, parent} = this.props;
     const {disabled} = this.state || {};
     return (
       <div>
         You've opted to pay: <br></br>
          {payment} {standardUnit}.<br></br>
-         You could be rewarded {reward} {standardUnit}
+         You could be rewarded
         <br></br> if you do some tasks.
         <br />
         <button
