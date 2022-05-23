@@ -24,7 +24,7 @@ export const main = Reach.App(() => {
 
   const B = Participant('Bob', {
     ...Common,
-    accchallenge: Fun([UInt, UInt], Bool),
+    accchallenge: Fun([UInt], Null),
     termsAccepted: Bool,
     Response1: Bytes(128),
   });
@@ -44,15 +44,17 @@ export const main = Reach.App(() => {
   B.only(() => {
  
    const termsAccepted =
-   declassify(interact.accchallenge(reward, payment));
+   declassify(interact.accchallenge(payment));
   });
   
   B.pay(payment);
   commit();
 
-A.publish();
+B.publish();
 transfer(payment).to(A);
 transfer(reward).to(B);
+commit();
+A.publish();
 each([A, B], () => interact.seeTransfer());
 commit();
 

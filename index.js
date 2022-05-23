@@ -7,11 +7,10 @@ import './index.css';
 import * as backend from './build/index.main.mjs';
 import { loadStdlib } from '@reach-sh/stdlib';
 import { ALGO_MyAlgoConnect as MyAlgoConnect } from '@reach-sh/stdlib';
-
 const reach = loadStdlib(process.env);
 const {standardUnit} = reach;
 const defaults = {defaultFundAmt: '10', defaultprice: '1', defaultreward: '2', standardUnit};
-
+// reach.setWalletFallback(reach.walletFallback({}));
 reach.setWalletFallback(reach.walletFallback({
   providerEnv: 'TestNet', MyAlgoConnect }));
 
@@ -91,11 +90,11 @@ class Deployer extends Common {
     backend.Bob(ctc, this);
     }
   
-    async accchallenge(rewardAtomic, paymentAtomic){
-      const reward = reach.formatCurrency(rewardAtomic, 4);
+    async accchallenge(paymentAtomic){
+ //     const reward = reach.formatCurrency(rewardAtomic, 4);
       const payment = reach.formatCurrency(paymentAtomic, 4);  
        return await new Promise(resolveAcceptedP => {
-        this.setState({view: 'AcceptTerms', reward, payment, resolveAcceptedP});
+        this.setState({view: 'AcceptTerms', payment, resolveAcceptedP});
       });
     }
     

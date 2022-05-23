@@ -3,3 +3,4 @@ node_modules/
 tls/
 
 .DS_STORE
+.reach
